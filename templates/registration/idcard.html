@@ -1,0 +1,31 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ID Card</title>
+    <link rel="stylesheet" href="{% static 'css/idcard.css' %}">
+</head>
+<body>
+<div class="id-card">
+    <div class="header">
+        <img src="https://via.placeholder.com/50" alt="Company Logo" class="logo">
+        <h2>ECSA</h2>
+    </div>
+    <div class="photo">
+        <img src="https://via.placeholder.com/80" alt="Profile Photo">
+    </div>
+    <div class="info">
+        <h3>{{id_card.student.username|title}}</h3>
+        <p>ID No:{{id_card.id_no}}</p>
+    </div>
+    <div class="qr-code">
+        <img src="{{ id_card.qr_code.url }}" alt="QR Code">
+    </div>
+    <div class="footer">
+        <p>Issued: 10/2024</p>
+    </div>
+</div>
+</body>
+</html>

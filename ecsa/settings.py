@@ -27,6 +27,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+SITE_ID = 1
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -36,7 +38,38 @@ INSTALLED_APPS = [
 	'django.contrib.sessions',
 	'django.contrib.messages',
 	'django.contrib.staticfiles',
+	'django.contrib.sites',
 	'registration',
+	'home',
+	'allauth',
+	'allauth.account',
+	'allauth.socialaccount',
+	'allauth.socialaccount.providers.google',
+	'crispy_forms'
+
+]
+
+# Provider specific settings
+SOCIALACCOUNT_PROVIDERS = {
+	'google': {
+		# For each OAuth based provider, either add a ``SocialApp``
+		# (``socialaccount`` app) containing the required client
+		# credentials, or list them here:
+		'SCOPE'      : [
+			"profile",
+			"email"
+		],
+		'AUTH_PARAMS': {"access_type": "online"}
+
+	}
+}
+
+AUTHENTICATION_BACKENDS = [
+	# Needed to login by username in Django admin, regardless of `allauth`
+	'django.contrib.auth.backends.ModelBackend',
+
+	# `allauth` specific authentication methods, such as login by email
+	'allauth.account.auth_backends.AuthenticationBackend',
 ]
 
 MIDDLEWARE = [
@@ -47,6 +80,7 @@ MIDDLEWARE = [
 	'django.contrib.auth.middleware.AuthenticationMiddleware',
 	'django.contrib.messages.middleware.MessageMiddleware',
 	'django.middleware.clickjacking.XFrameOptionsMiddleware',
+	"allauth.account.middleware.AccountMiddleware",
 ]
 
 ROOT_URLCONF = 'ecsa.urls'
@@ -125,3 +159,10 @@ MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+LOGIN_REDIRECT_URL = "/register"
+LOGOUT_REDIRECT_URL = "/"
+SOCIALACCOUNT_LOGIN_ON_GET = True
+
+ACCOUNT_LOGOUT_ON_GET = True

@@ -57,7 +57,7 @@ body {
 }
 
 .header {
-    background-color: #4CAF50;
+    background-color: #A020F0;
     color: white;
     padding: 10px;
     border-radius: 10px 10px 0 0;
@@ -102,7 +102,7 @@ body {
     width: 80px; /* Reduced profile photo size */
     height: 80px;
     border-radius: 50%;
-    border: 2px solid #4CAF50;
+    border: 2px solid 	#A020F0;
 }
 
 .info {

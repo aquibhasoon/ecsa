@@ -10,15 +10,15 @@
 <body>
 <div class="id-card">
     <div class="header">
-        <img src="https://via.placeholder.com/50" alt="Company Logo" class="logo">
+{#        <img src="" alt="Company Logo" class="logo">#}
         <h2>ECSA</h2>
     </div>
     <div class="photo">
-        <img src="https://via.placeholder.com/80" alt="Profile Photo">
+        <img src="{{ id_card.profile_pic.url }}" alt="Profile Photo">
     </div>
     <div class="info">
-        <h3>{{id_card.student.username|title}}</h3>
-        <p>ID No:{{id_card.id_no}}</p>
+        <h3>{{id_card.name|title}}</h3>
+        <p>ID No: {{id_card.student_id_no}}</p>
     </div>
     <div class="qr-code">
         <img src="{{ id_card.qr_code.url }}" alt="QR Code">

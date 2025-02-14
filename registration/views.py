@@ -29,13 +29,15 @@ def register(request):
 	context = {"form": form}
 	return render(request, 'registration/register.html', context)
 
-
 def idcard(request):
-	context = {"id_card": Application.objects.filter(student_id_no=22021894).last(),
+    application = Application.objects.filter(student=request.user, accepted=True).last()
 
-	           }
-	print(context)
-	return render(request, 'registration/idcard.html', context)
+    if application:
+        context = {"id_card": application}
+    else:
+        context = {"message": "Your application is not verified yet. Please wait for approval."}
+
+    return render(request, 'registration/idcard.html', context)
 
 
 

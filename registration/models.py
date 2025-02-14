@@ -42,6 +42,7 @@ class Application(models.Model):
 			self.qr_code.save(f'{self.student_id_no}.png', img_file, save=False)
 
 			super().save(*args, **kwargs)
+		super().save(*args, **kwargs)
 
 
 class Profile(models.Model):

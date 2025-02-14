@@ -10,19 +10,31 @@
 <body>
 <div class="id-card">
     <div class="header">
-{#        <img src="" alt="Company Logo" class="logo">#}
+        <img src="{% static 'images/company-logo.png' %}" alt="Company Logo" class="logo">
         <h2>ECSA</h2>
     </div>
+    
     <div class="photo">
-        <img src="{{ id_card.profile_pic.url }}" alt="Profile Photo">
+        {% if id_card.profile_pic %}
+            <img src="{{ id_card.profile_pic.url }}" alt="Profile Photo">
+        {% else %}
+            <p class="placeholder">No Photo Available</p>
+        {% endif %}
     </div>
+
     <div class="info">
-        <h3>{{id_card.name|title}}</h3>
-        <p>ID No: {{id_card.student_id_no}}</p>
+        <h3>{{ id_card.name|title }}</h3>
+        <p>ID No: {{ id_card.student_id_no }}</p>
     </div>
+
     <div class="qr-code">
-        <img src="{{ id_card.qr_code.url }}" alt="QR Code">
+        {% if id_card.qr_code %}
+            <img src="{{ id_card.qr_code.url }}" alt="QR Code">
+        {% else %}
+            <p class="placeholder">No QR Code</p>
+        {% endif %}
     </div>
+
     <div class="footer">
         <p>Issued: 10/2024</p>
     </div>

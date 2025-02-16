@@ -34,10 +34,12 @@ def idcard(request):
 
     if application:
         context = {"id_card": application}
+        return render(request, 'registration/idcard.html', context)
     else:
-        context = {"message": "Your application is not verified yet. Please wait for approval."}
+        # Redirect to the disclaimer page if the application is not accepted
+        return redirect('disclaimer')
 
-    return render(request, 'registration/idcard.html', context)
-
-
-
+def disclaimer(request):
+    disclaimer_message = "Your application is not verified yet. Please wait for approval. Note that this ID card is not valid until your application is approved."
+    context = {"disclaimer_message": disclaimer_message}
+    return render(request, 'registration/disclaimer.html', context)

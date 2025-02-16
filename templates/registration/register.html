@@ -1,27 +1,57 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registration Form</title>
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script> <!-- Include Tailwind CSS -->
+    <style>
+        /* Custom CSS for the background image */
+        body {
+            background-image: url('{% static "hero-bg.jpg" %}'); /* Your static image */
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+        /* Overlay to improve readability */
+        .overlay {
+            background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent white overlay */
+        }
+    </style>
 </head>
-<body>
-<div class="container mt-5">
-    <h2>Registration Form</h2>
-    <form method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        {% for field in form %}
-            <div class="form-group">
-                {{ field.label_tag }}
-                {{ field }}
-                {% if field.errors %}
-                    <div class="text-danger">{{ field.errors }}</div>
-                {% endif %}
-            </div>
-        {% endfor %}
-        <button type="submit" class="btn btn-primary">Submit</button>
-    </form>
-</div>
+<body class="flex items-center justify-center min-h-screen p-4">
+    <!-- Overlay and Form Container -->
+    <div class="overlay rounded-lg shadow-lg p-8 max-w-md w-full">
+        <!-- Form Heading -->
+        <h2 class="text-3xl font-bold text-[#0023bd] mb-8 text-center">Registration Form</h2>
+
+        <!-- Registration Form -->
+        <form method="post" enctype="multipart/form-data" class="space-y-6">
+            {% csrf_token %}
+            {% for field in form %}
+                <div class="form-group">
+                    <!-- Label -->
+                    <label for="{{ field.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-1">
+                        {{ field.label }}
+                    </label>
+                    <!-- Input Field -->
+                    <input type="{{ field.field.widget.input_type }}"
+                           name="{{ field.name }}"
+                           id="{{ field.id_for_label }}"
+                           class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#0023bd] focus:border-[#0023bd] outline-none transition duration-300"
+                           placeholder="{{ field.field.widget.attrs.placeholder }}">
+                    <!-- Error Messages -->
+                    {% if field.errors %}
+                        <div class="text-red-500 text-sm mt-1">{{ field.errors }}</div>
+                    {% endif %}
+                </div>
+            {% endfor %}
+            <!-- Submit Button -->
+            <button type="submit" class="w-full bg-[#0023bd] text-white py-2 px-4 rounded-lg hover:bg-[#001a8c] focus:ring-2 focus:ring-[#0023bd] focus:outline-none transition duration-300">
+                Submit
+            </button>
+        </form>
+    </div>
 </body>
 </html>

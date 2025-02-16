@@ -5,39 +5,58 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ID Card</title>
-    <link rel="stylesheet" href="{% static 'css/idcard.css' %}">
+    <script src="https://cdn.tailwindcss.com"></script> <!-- Include Tailwind CSS -->
+    <style>
+        /* Custom CSS for the background image */
+        body {
+            background-image: url('{% static "hero-bg.jpg" %}'); /* Your static image */
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+        /* Overlay to improve readability */
+        .overlay {
+            background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent white overlay */
+        }
+    </style>
 </head>
-<body>
-<div class="id-card">
-    <div class="header">
-        <img src="{% static 'images/company-logo.png' %}" alt="Company Logo" class="logo">
-        <h2>ECSA</h2>
-    </div>
-    
-    <div class="photo">
-        {% if id_card.profile_pic %}
-            <img src="{{ id_card.profile_pic.url }}" alt="Profile Photo">
-        {% else %}
-            <p class="placeholder">No Photo Available</p>
-        {% endif %}
-    </div>
+<body class="flex items-center justify-center min-h-screen p-4">
+    <!-- ID Card Container -->
+    <div class="id-card bg-white rounded-lg shadow-lg overflow-hidden w-96">
+        <!-- Header Section -->
+        <div class="header bg-[#6610f2] p-6 text-center"> <!-- Use custom color -->
+            <img src="{% static 'ecsalogo.png' %}" alt="Company Logo" class="logo w-20 h-20 mx-auto">
+            <h2 class="text-white text-2xl font-bold mt-4">ECSA</h2>
+        </div>
 
-    <div class="info">
-        <h3>{{ id_card.name|title }}</h3>
-        <p>ID No: {{ id_card.student_id_no }}</p>
-    </div>
-
-    <div class="qr-code">
-        {% if id_card.qr_code %}
-            <img src="{{ id_card.qr_code.url }}" alt="QR Code">
-        {% else %}
-            <p class="placeholder">No QR Code</p>
-        {% endif %}
-    </div>
-
-    <div class="footer">
-        <p>Issued: 10/2024</p>
-    </div>
+       <!-- Profile Photo Section -->
+<div class="photo flex justify-center p-4">
+    {% if id_card.profile_pic %}
+        <img src="{{ id_card.profile_pic.url }}" alt="Profile Photo" class="w-32 h-32 rounded-full border-4 border-[#0023bd] object-cover">
+    {% else %}
+        <p class="placeholder text-gray-500">No Photo Available</p>
+    {% endif %}
 </div>
+
+        <!-- Info Section -->
+        <div class="info text-center p-4">
+            <h3 class="text-xl font-bold text-gray-800">{{ id_card.name|title }}</h3>
+            <p class="text-gray-600 mt-1">ID No: {{ id_card.student_id_no }}</p>
+        </div>
+
+        <!-- QR Code Section -->
+        <div class="qr-code flex justify-center p-4">
+            {% if id_card.qr_code %}
+                <img src="{{ id_card.qr_code.url }}" alt="QR Code" class="w-24 h-24">
+            {% else %}
+                <p class="placeholder text-gray-500">No QR Code</p>
+            {% endif %}
+        </div>
+
+        <!-- Footer Section -->
+        <div class="footer bg-gray-100 p-4 text-center">
+            <p class="text-gray-600 text-sm">Issued: 10/2024</p>
+        </div>
+    </div>
 </body>
 </html>

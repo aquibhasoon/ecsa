@@ -1,0 +1,37 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Disclaimer</title>
+    <script src="https://cdn.tailwindcss.com"></script> <!-- Include Tailwind CSS -->
+    <style>
+        /* Custom CSS for the background image */
+        body {
+            background-image: url('{% static "hero-bg.jpg" %}'); /* Your static image */
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+    </style>
+</head>
+<body class="flex items-center justify-center min-h-screen p-4">
+    <!-- Disclaimer Container -->
+    <div class="disclaimer-container bg-white rounded-lg shadow-lg p-8 max-w-md w-full text-center">
+        <!-- Heading -->
+        <h1 class="text-3xl font-bold text-[#0023bd] mb-6">Disclaimer</h1>
+
+        <!-- Disclaimer Message -->
+        <p class="text-gray-700 text-lg mb-6">{{ disclaimer_message }}</p>
+
+        <!-- Support Message -->
+        <p class="text-gray-600 mb-6">Please contact support if you have any questions.</p>
+
+        <!-- Home Link -->
+        <a href="https://ecsacusat.com/" class="inline-block bg-[#0023bd] text-white py-2 px-6 rounded-lg hover:bg-[#001a8c] transition duration-300">
+            Return to Home
+        </a>
+    </div>
+</body>
+</html>
